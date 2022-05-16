@@ -21,7 +21,7 @@ export default {
         gunlic: String,
         crime: String,
         image: String,
-        pk: String
+        pk: Number
     }
 }
 </script>
@@ -42,9 +42,13 @@ export default {
         -ms-transition: 0.4s
         -o-transition: 0.4s
         transition: 0.4s
+        background-color: #718093
+        color: #192a56
+        text-transform: capitalize
         & .img
             width: 60px
             height: 60px
+            margin-bottom: 2px
         &:hover
             cursor: pointer
             -webkit-transform: scale(1.2)

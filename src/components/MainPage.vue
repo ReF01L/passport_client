@@ -1,6 +1,12 @@
 <template>
     <main class="main">
-        <input type="search" class="search" v-model="search">
+        <div class="header">
+            <input type="search" class="search" v-model="search">
+            <div class="filter">
+                <button class="filter-btn" @click="filter" id="oto">отовичанин</button>
+                <button class="filter-btn" @click="filter" id="bar">барсогорец</button>
+            </div>
+        </div>
         <div class="cards">
             <CardComp v-for="card in searchCards" :key="card.id"
                       :name="card.name"
@@ -26,7 +32,22 @@ export default {
     data: () => {
         return {
             cards: [],
-            search: ''
+            search: '',
+            nats: ['Отовичанин', 'Барсогорец']
+        }
+    },
+    methods: {
+        filter(event) {
+            this.search = event.srcElement.innerText
+            if (this.search === this.nats[0]) {
+                document.querySelectorAll('#bar').forEach(elem => {
+                    elem.classList.remove('active')
+                })
+            } else if (this.search === this.nats[1]) {
+                document.querySelectorAll('#oto').forEach(elem => {
+                    elem.classList.remove('active')
+                })
+            }
         }
     },
     mounted() {
@@ -42,9 +63,23 @@ export default {
     },
     computed: {
         searchCards() {
+            if (this.search === this.nats[0]) {
+                document.querySelectorAll('#oto').forEach(elem => {
+                    elem.classList.add('active')
+                })
+            } else if (this.search === this.nats[1]) {
+                document.querySelectorAll('#bar').forEach(elem => {
+                    elem.classList.add('active')
+                })
+            } else {
+                document.querySelectorAll('#bar, #oto').forEach(elem => {
+                    elem.classList.remove('active')
+                })
+            }
             return this.cards.filter(user => user.name.toLowerCase().includes(this.search.toLowerCase()) ||
                 user.lastname.toLowerCase().includes(this.search.toLowerCase()) ||
-                user.user_id.toLowerCase().includes(this.search.toLowerCase())
+                user.user_id.toLowerCase().includes(this.search.toLowerCase()) ||
+                user.nat.toLowerCase().includes(this.search.toLowerCase())
             )
         }
     }
@@ -52,20 +87,66 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.search
-    margin-left: calc(50% - 180px)
-    width: 360px
-    height: 35px
-    outline: none
-    border: 1px solid gray
-    margin-top: 25px
+.main
+    background-color: #7f8fa6
+    min-height: 100vh
+    max-width: 100vw
+.header
+    display: flex
+    justify-content: center
+    margin-left: 90px
+    align-items: center
+    padding-top: 25px
     margin-bottom: 10px
-    padding: 5px 10px
+    @media screen and (max-width: 600px)
+        flex-direction: column
+        margin-left: 0
+    .search
+        width: 360px
+        height: 35px
+        outline: none
+        border: 1px solid gray
+        padding: 5px 10px
+        margin-right: 25px
+        border-radius: 10px
+        color: #2f3640
+        font-weight: 600
+        @media screen and (max-width: 600px)
+            width: 180px
+            margin-right: 0
+            margin-bottom: 10px
+    .filter
+        display: flex
+        justify-content: center
+        align-items: center
+        &-btn
+            text-transform: capitalize
+            height: 35px
+            border: none
+            border-radius: 10px
+            padding: 10px
+            color: #192a56
+            font-size: 18px
+            display: flex
+            justify-content: center
+            align-items: center
+            &:hover
+                cursor: pointer
+            &.active
+                background-color: #4cd137
+            &:first-child
+                border-bottom-right-radius: 0
+                border-top-right-radius: 0
+            &:last-child
+                border-bottom-left-radius: 0
+                border-top-left-radius: 0
+
 
 .cards
     display: flex
     flex-wrap: wrap
-    width: 1080px
-    margin-left: calc((100vw - 1080px) / 2)
+    width: 100%
+    justify-content: center
+    align-items: center
 
 </style>

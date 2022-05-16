@@ -1,13 +1,24 @@
 <template>
     <main class="main">
+        <router-link to="/" class="back">Назад</router-link>
         <img :src="profile.image" alt="" class="img">
-        <div class="content">
-            <div class="content_name">{{ profile.name }}</div>
-            <div class="content_lastname">{{ profile.lastname }}</div>
-            <div class="content_user_id">{{ profile.user_id }}</div>
-            <div class="content_nat">{{ profile.nat }}</div>
-            <div class="content_gunlic">{{ profile.gunlic }}</div>
-            <div class="content_crime">{{ profile.crime }}</div>
+        <div class="data">
+            <div class="titles">
+                <div>Имя</div>
+                <div>Фамилия</div>
+                <div>Паспорт</div>
+                <div>Национальность</div>
+                <div>Лицензия на оружие</div>
+                <div>Преступления</div>
+            </div>
+            <div class="content">
+                <div class="content_name">{{ profile.name }}</div>
+                <div class="content_lastname">{{ profile.lastname }}</div>
+                <div class="content_user_id">{{ profile.user_id }}</div>
+                <div class="content_nat">{{ profile.nat }}</div>
+                <div class="content_gunlic">{{ profile.gunlic }}</div>
+                <div class="content_crime">{{ profile.crime }}</div>
+            </div>
         </div>
     </main>
 </template>
@@ -39,21 +50,55 @@ export default {
 <style lang="sass" scoped>
 .main
     display: flex
-    flex-wrap: wrap
-    width: 1080px
-    margin-left: calc((100vw - 1080px) / 2)
-    padding-top: 120px
+    background-color: #7f8fa6
+    min-height: 100vh
+    max-width: 100vw
+    justify-content: center
+    align-items: center
+    flex-direction: column
+    padding-bottom: 100px
+    @media screen and (max-width: 600px)
+        width: 320px
+    & .back
+        font-size: 24px
+        text-decoration: none
+        color: #2f3640
+        display: inline
+        padding-bottom: 25px
     & .img
         width: 320px
-        min-height: 420px
+        height: 320px
         border: 1px solid black
-        margin-right: 100px
-    & .content
+        outline: none
+        margin-bottom: 30px
+        @media screen and (max-width: 600px)
+            width: 160px
+            height: 160px
+    & .data
         display: flex
-        flex-direction: column
-        justify-content: flex-start
-        align-items: center
-        & div
-            font-size: 32px
-            margin-bottom: 15px
+        justify-content: space-between
+        & .titles
+            & div
+                font-size: 32px
+                margin-bottom: 15px
+                border-bottom: 1px solid #353b48
+                color: #353b48
+                @media screen and (max-width: 600px)
+                    font-size: 16px
+        & .content
+            display: flex
+            flex-direction: column
+            justify-content: flex-start
+            align-items: center
+            & div
+                font-size: 32px
+                margin-bottom: 15px
+                text-align: right
+                width: 300px
+                border-bottom: 1px solid #353b48
+                color: #353b48
+                text-transform: capitalize
+                @media screen and (max-width: 600px)
+                    font-size: 16px
+                    width: 120px
 </style>

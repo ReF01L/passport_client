@@ -8,5 +8,9 @@ export default {
 }
 </script>
 
-<style>
+<style lang="sass">
+*
+    padding: 0
+    margin: 0
+    box-sizing: border-box
 </style>
