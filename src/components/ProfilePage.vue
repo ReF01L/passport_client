@@ -57,8 +57,6 @@ export default {
     align-items: center
     flex-direction: column
     padding-bottom: 100px
-    @media screen and (max-width: 600px)
-        width: 320px
     & .back
         font-size: 24px
         text-decoration: none
