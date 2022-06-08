@@ -34,6 +34,11 @@ export default {
         }
     },
     mounted() {
+        if (localStorage.getItem('user_id') === null) {
+            this.$router.replace('/login')
+            return
+        }
+
         axios.get(`http://127.0.0.1:8000/api/passports/${this.$route.params.profile_id}`)
             .then(res => {
                 if (res.status === 200) {
@@ -57,12 +62,14 @@ export default {
     align-items: center
     flex-direction: column
     padding-bottom: 100px
+
     & .back
         font-size: 24px
         text-decoration: none
         color: #2f3640
         display: inline
         padding-bottom: 25px
+
     & .img
         width: 320px
         height: 320px
@@ -72,9 +79,11 @@ export default {
         @media screen and (max-width: 600px)
             width: 160px
             height: 160px
+
     & .data
         display: flex
         justify-content: space-between
+
         & .titles
             & div
                 font-size: 32px
@@ -83,11 +92,13 @@ export default {
                 color: #353b48
                 @media screen and (max-width: 600px)
                     font-size: 16px
+
         & .content
             display: flex
             flex-direction: column
             justify-content: flex-start
             align-items: center
+
             & div
                 font-size: 32px
                 margin-bottom: 15px

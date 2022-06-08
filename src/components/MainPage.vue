@@ -51,6 +51,11 @@ export default {
         }
     },
     mounted() {
+        if (localStorage.getItem('user_id') === null) {
+            this.$router.replace('/login')
+            return
+        }
+
         axios.get(`http://127.0.0.1:8000/api/passports`)
             .then(res => {
                 if (res.status === 200) {
@@ -91,6 +96,7 @@ export default {
     background-color: #7f8fa6
     min-height: 100vh
     max-width: 100vw
+
 .header
     display: flex
     justify-content: center
@@ -101,6 +107,7 @@ export default {
     @media screen and (max-width: 600px)
         flex-direction: column
         margin-left: 0
+
     .search
         width: 360px
         height: 35px
@@ -115,10 +122,12 @@ export default {
             width: 180px
             margin-right: 0
             margin-bottom: 10px
+
     .filter
         display: flex
         justify-content: center
         align-items: center
+
         &-btn
             text-transform: capitalize
             height: 35px
@@ -130,13 +139,17 @@ export default {
             display: flex
             justify-content: center
             align-items: center
+
             &:hover
                 cursor: pointer
+
             &.active
                 background-color: #4cd137
+
             &:first-child
                 border-bottom-right-radius: 0
                 border-top-right-radius: 0
+
             &:last-child
                 border-bottom-left-radius: 0
                 border-top-left-radius: 0
